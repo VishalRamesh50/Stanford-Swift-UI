@@ -11,7 +11,7 @@ import Foundation
 struct MemoryGame<CardContent> {
     var cards: Array<Card>
     
-    func chooseCard(card: Card) {
+    func choose(card: Card) {
         print("card chosen: \(card)")
     }
     
