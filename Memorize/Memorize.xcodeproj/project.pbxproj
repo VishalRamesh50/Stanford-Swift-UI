@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA12A8D824A98CB800614A61 /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12A8D724A98CB800614A61 /* MemoryGame.swift */; };
 		CAEE21BE24A940F10041E862 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEE21BD24A940F10041E862 /* AppDelegate.swift */; };
 		CAEE21C024A940F10041E862 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEE21BF24A940F10041E862 /* SceneDelegate.swift */; };
 		CAEE21C224A940F10041E862 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEE21C124A940F10041E862 /* ContentView.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA12A8D724A98CB800614A61 /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 		CAEE21BA24A940F10041E862 /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAEE21BD24A940F10041E862 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAEE21BF24A940F10041E862 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				CAEE21BD24A940F10041E862 /* AppDelegate.swift */,
 				CAEE21BF24A940F10041E862 /* SceneDelegate.swift */,
 				CAEE21C124A940F10041E862 /* ContentView.swift */,
+				CA12A8D724A98CB800614A61 /* MemoryGame.swift */,
 				CAEE21C324A940F60041E862 /* Assets.xcassets */,
 				CAEE21C824A940F60041E862 /* LaunchScreen.storyboard */,
 				CAEE21CB24A940F60041E862 /* Info.plist */,
@@ -148,6 +151,7 @@
 			files = (
 				CAEE21BE24A940F10041E862 /* AppDelegate.swift in Sources */,
 				CAEE21C024A940F10041E862 /* SceneDelegate.swift in Sources */,
+				CA12A8D824A98CB800614A61 /* MemoryGame.swift in Sources */,
 				CAEE21C224A940F10041E862 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
