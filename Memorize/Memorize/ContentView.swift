@@ -22,6 +22,7 @@ struct ContentView: View {
             .padding()
             .foregroundColor(Color.orange)
             .font(Font.largeTitle)
+            .aspectRatio(2/3, contentMode: .fit)
     }
 }
 
