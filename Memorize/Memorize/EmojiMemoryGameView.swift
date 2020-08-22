@@ -19,7 +19,6 @@ struct EmojiMemoryGameView: View {
         .padding(5)
         }
             .padding()
-            .foregroundColor(Color.orange)
             .aspectRatio(2/3, contentMode: .fit)
     }
 }
@@ -47,6 +46,7 @@ struct CardView: View {
             }
         }
         .font(Font.system(size: fontSize(for: size)))
+        .foregroundColor(Color.themeToColor(color: card.color))
     }
     
     // MARK: - Drawing Constants
