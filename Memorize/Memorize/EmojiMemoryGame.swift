@@ -11,7 +11,7 @@ import Foundation
 class EmojiMemoryGame: ObservableObject {
     @Published private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
     
-    static func createMemoryGame() -> MemoryGame<String> {
+    private static func createMemoryGame() -> MemoryGame<String> {
         let themes = [
             MemoryGameTheme(name: "Halloween", emojis: ["👻","🎃", "🕷"], pairs: 3, color: ThemeColor.orange),
             MemoryGameTheme(name: "Sports", emojis: ["⚽️","🥎", "🏸", "🎱", "🏀"], pairs: 4, color: ThemeColor.red),
