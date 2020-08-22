@@ -9,7 +9,7 @@
 import SwiftUI
 
 extension Color {
-    static func themeToColor(color: ThemeColor) -> Color {
+    static func fromThemeColor(color: ThemeColor) -> Color {
         switch color {
         case .red:
             return Color.red

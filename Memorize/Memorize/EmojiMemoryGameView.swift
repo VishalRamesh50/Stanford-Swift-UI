@@ -63,7 +63,7 @@ struct CardView: View {
             }
         }
         .font(Font.system(size: fontSize(for: size)))
-        .foregroundColor(Color.themeToColor(color: card.color))
+        .foregroundColor(Color.fromThemeColor(color: card.color))
     }
     
     // MARK: - Drawing Constants
