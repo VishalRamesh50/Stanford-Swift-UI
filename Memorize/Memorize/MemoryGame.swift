@@ -10,6 +10,8 @@ import Foundation
 
 struct MemoryGame<CardContent> where CardContent: Equatable {
     var cards: Array<Card>
+    var themeName: String
+    var score: Int = 0
     
     var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get { cards.indices.filter { cards[$0].isFaceUp }.only }
@@ -19,13 +21,16 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             }
         }
     }
+    var lastSeen: Date?
+    var previouslySeenCardIDs: Set<Int> = Set<Int>()
     
-    init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
+    init(themeName: String, numberOfPairsOfCards: Int, color: ThemeColor, cardContentFactory: (Int) -> CardContent) {
+        self.themeName = themeName
         cards = Array<Card>()
         for pairIndex in 0..<numberOfPairsOfCards {
             let content = cardContentFactory(pairIndex)
-            cards.append(Card(content: content, id: pairIndex * 2))
-            cards.append(Card(content: content, id: pairIndex * 2 + 1))
+            cards.append(Card(content: content, id: pairIndex * 2, color: color))
+            cards.append(Card(content: content, id: pairIndex * 2 + 1, color: color))
         }
         cards.shuffle()
     }
@@ -37,12 +42,21 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 if cards[chosenIndex].content == cards[potentialMatchIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
+                    // MARK: Extra Credit (Time Sensitive Scoring System)
+                    let difference = Int(lastSeen!.timeIntervalSinceNow)
+                    score += max(10 + difference, 1)
+                } else {
+                    if previouslySeenCardIDs.contains(cards[chosenIndex].id) {
+                        score -= 1
+                    }
+                    previouslySeenCardIDs.insert(cards[chosenIndex].id)
                 }
                 self.cards[chosenIndex].isFaceUp = true
             } else {
                 indexOfTheOneAndOnlyFaceUpCard = chosenIndex
             }
         }
+        lastSeen = Date()
     }
     
     struct Card: Identifiable {
@@ -50,5 +64,6 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         var isMatched: Bool = false
         var content: CardContent
         var id: Int
+        var color: ThemeColor
     }
 }
