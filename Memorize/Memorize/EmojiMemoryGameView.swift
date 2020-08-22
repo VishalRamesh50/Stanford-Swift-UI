@@ -20,16 +20,21 @@ struct EmojiMemoryGameView: View {
                 }
                     .padding(5)
             }
-            Button(action: {
-                self.viewModel.newGame()
-            }, label: {
-                Text("NEW GAME")
-                .padding(10)
-                .padding(.horizontal, 10)
-                .background(Color.green)
-                .foregroundColor(Color.white)
-                .cornerRadius(30)
-            })
+            HStack {
+                Button(action: {
+                    self.viewModel.newGame()
+                }, label: {
+                    Text("NEW GAME")
+                    .padding(10)
+                    .padding(.horizontal, 10)
+                    .background(Color.green)
+                    .foregroundColor(Color.white)
+                    .cornerRadius(30)
+                })
+                Spacer()
+                Text("(Score: \(viewModel.score))").font(.body)
+            }
+            .padding(.horizontal, 10)
         }
             .padding()
     }
