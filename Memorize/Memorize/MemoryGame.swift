@@ -21,6 +21,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             }
         }
     }
+    var previouslySeenCardIDs: Set<Int> = Set<Int>()
     
     init(themeName: String, numberOfPairsOfCards: Int, color: ThemeColor, cardContentFactory: (Int) -> CardContent) {
         self.themeName = themeName
@@ -40,6 +41,12 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 if cards[chosenIndex].content == cards[potentialMatchIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
+                    score += 2
+                } else {
+                    if previouslySeenCardIDs.contains(cards[chosenIndex].id) {
+                        score -= 1
+                    }
+                    previouslySeenCardIDs.insert(cards[chosenIndex].id)
                 }
                 self.cards[chosenIndex].isFaceUp = true
             } else {
