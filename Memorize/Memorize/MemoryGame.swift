@@ -21,6 +21,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             }
         }
     }
+    var lastSeen: Date?
     var previouslySeenCardIDs: Set<Int> = Set<Int>()
     
     init(themeName: String, numberOfPairsOfCards: Int, color: ThemeColor, cardContentFactory: (Int) -> CardContent) {
@@ -41,7 +42,9 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 if cards[chosenIndex].content == cards[potentialMatchIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
-                    score += 2
+                    // MARK: Extra Credit (Time Sensitive Scoring System)
+                    let difference = Int(lastSeen!.timeIntervalSinceNow)
+                    score += max(10 + difference, 1)
                 } else {
                     if previouslySeenCardIDs.contains(cards[chosenIndex].id) {
                         score -= 1
@@ -53,6 +56,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 indexOfTheOneAndOnlyFaceUpCard = chosenIndex
             }
         }
+        lastSeen = Date()
     }
     
     struct Card: Identifiable {
