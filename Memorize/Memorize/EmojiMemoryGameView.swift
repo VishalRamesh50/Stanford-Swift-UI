@@ -17,26 +17,31 @@ struct EmojiMemoryGameView: View {
             Grid(viewModel.cards) { card in
                 CardView(card: card).onTapGesture {
                     self.viewModel.choose(card: card)
-                }
-                    .padding(5)
+                }.padding(5)
             }
             HStack {
-                Button(action: {
-                    self.viewModel.newGame()
-                }, label: {
-                    Text("NEW GAME")
-                        .padding(10)
-                        .padding(.horizontal, 10)
-                        .background(Color.green)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(30)
-                })
+                NewGameButton
                 Spacer()
-                Text("(Score: \(viewModel.score))").font(.body)
-            }
-            .padding(.horizontal, 10)
-        }
-            .padding()
+                Score
+            }.padding(.horizontal, 10)
+        }.padding()
+    }
+    
+    private var NewGameButton: some View {
+        Button(action: {
+            self.viewModel.newGame()
+        }, label: {
+            Text("NEW GAME")
+                .padding(10)
+                .padding(.horizontal, 10)
+                .background(Color.green)
+                .foregroundColor(Color.white)
+                .cornerRadius(30)
+        })
+    }
+    
+    private var Score: some View {
+        Text("(Score: \(viewModel.score))").font(.body)
     }
 }
 
