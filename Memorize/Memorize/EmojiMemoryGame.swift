@@ -27,7 +27,6 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     // MARK: - Access to the Model
-
     var cards: Array<MemoryGame<String>.Card> {
         model.cards
     }
@@ -41,7 +40,6 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     // MARK: - Intents
-    
     func choose(card: MemoryGame<String>.Card) {
         model.choose(card: card)
     }
