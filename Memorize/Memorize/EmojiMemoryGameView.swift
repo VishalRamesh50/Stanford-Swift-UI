@@ -49,7 +49,7 @@ struct EmojiMemoryGameView: View {
     }
     
     // MARK: - Drawing Constants
-    private let cardChooseAnimationDuration = 0.75
+    private let cardChooseAnimationDuration = 0.4
 }
 
 struct CardView: View {
