@@ -16,7 +16,7 @@ struct EmojiMemoryGameView: View {
             Text(viewModel.themeName).font(.title)
             Grid(viewModel.cards) { card in
                 CardView(card: card).onTapGesture {
-                    withAnimation(.linear(duration: 0.75)) {
+                    withAnimation(.linear(duration: self.cardChooseAnimationDuration)) {
                         self.viewModel.choose(card: card)
                     }
                 }.padding(5)
@@ -47,6 +47,9 @@ struct EmojiMemoryGameView: View {
     private var Score: some View {
         Text("(Score: \(viewModel.score))").font(.body)
     }
+    
+    // MARK: - Drawing Constants
+    private let cardChooseAnimationDuration = 0.75
 }
 
 struct CardView: View {
@@ -73,15 +76,15 @@ struct CardView: View {
             ZStack {
                 Group {
                     if card.isConsumingBonusTime {
-                        Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(-animatedBonusRemaining*360-90), clockwise: true)
+                        Pie(startAngle: Angle.degrees(0-angleOffset), endAngle: Angle.degrees(-animatedBonusRemaining*360-angleOffset), clockwise: true)
                             .onAppear() {
                                 self.startBonusTimeAnimation()
                         }
                     } else {
-                        Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(-card.bonusRemaining*360-90), clockwise: true)
+                        Pie(startAngle: Angle.degrees(0-angleOffset), endAngle: Angle.degrees(-card.bonusRemaining*360-angleOffset), clockwise: true)
                     }
                 }
-                    .padding(5).opacity(0.4)
+                    .padding(5).opacity(pieOpacity)
                     .transition(.scale)
                 Text(card.content)
                     .font(Font.system(size: fontSize(for: size)))
@@ -95,6 +98,8 @@ struct CardView: View {
     }
     
     // MARK: - Drawing Constants
+    private let angleOffset: Double = 90
+    private let pieOpacity = 0.4
     private func fontSize(for size: CGSize) -> CGFloat {
         min(size.width, size.height) * 0.7
     }
