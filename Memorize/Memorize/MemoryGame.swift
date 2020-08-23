@@ -41,7 +41,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 if cards[chosenIndex].content == cards[potentialMatchIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
-                    score += 2
+                    score += max(1, Int(cards[chosenIndex].bonusTimeRemaining + cards[potentialMatchIndex].bonusTimeRemaining))
                 } else {
                     if previouslySeenCardIDs.contains(cards[chosenIndex].id) || previouslySeenCardIDs.contains(cards[potentialMatchIndex].id) {
                         score -= 1
