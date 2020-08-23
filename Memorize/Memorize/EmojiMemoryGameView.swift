@@ -13,7 +13,7 @@ struct EmojiMemoryGameView: View {
 
     var body: some View {
         VStack {
-            Text(viewModel.themeName).font(.title)
+            Text(viewModel.themeName).font(.title).animation(.none)
             Grid(viewModel.cards) { card in
                 CardView(card: card).onTapGesture {
                     withAnimation(.linear(duration: self.cardChooseAnimationDuration)) {
@@ -45,7 +45,7 @@ struct EmojiMemoryGameView: View {
     }
     
     private var Score: some View {
-        Text("(Score: \(viewModel.score))").font(.body)
+        Text("(Score: \(viewModel.score))").font(.body).animation(.none)
     }
     
     // MARK: - Drawing Constants
