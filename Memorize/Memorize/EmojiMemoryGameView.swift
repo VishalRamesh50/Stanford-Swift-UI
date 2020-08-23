@@ -80,7 +80,9 @@ struct CardView: View {
                     } else {
                         Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(-card.bonusRemaining*360-90), clockwise: true)
                     }
-                }.padding(5).opacity(0.4)
+                }
+                    .padding(5).opacity(0.4)
+                    .transition(.scale)
                 Text(card.content)
                     .font(Font.system(size: fontSize(for: size)))
                     .rotationEffect(Angle.degrees(card.isMatched ? 360: 0))
