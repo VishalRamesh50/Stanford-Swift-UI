@@ -13,7 +13,7 @@ class EmojiMemoryGame: ObservableObject {
     
     private static func createMemoryGame() -> MemoryGame<String> {
         let themes = [
-            MemoryGameTheme(name: "Halloween", emojis: ["👻","🎃", "🕷"], pairs: 3, color: ThemeColor.orange),
+            MemoryGameTheme(name: "Halloween", emojis: ["👻","🎃", "🕷", "🕸", "🦇", "☠️"], pairs: 3, color: ThemeColor.orange),
             MemoryGameTheme(name: "Sports", emojis: ["⚽️","🥎", "🏸", "🎱", "🏀"], pairs: 4, color: ThemeColor.red),
             MemoryGameTheme(name: "Animals", emojis: ["🐶","🐼", "🦄", "🐯", "🐮"], pairs: 5, color: ThemeColor.pink),
             MemoryGameTheme(name: "Faces", emojis: ["😎","😅", "😉", "😤", "🤑"], pairs: nil, color: ThemeColor.yellow),
