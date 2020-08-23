@@ -110,13 +110,13 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             isMatched && bonusTimeRemaining > 0
         }
         // whether we are currently face up, unmatched and have not yet used up the bonus window
-        var isConsumingTimeBonus: Bool {
+        var isConsumingBonusTime: Bool {
             isFaceUp && !isMatched && bonusTimeRemaining > 0
         }
         
         // called when the card transitions to face up state
         private mutating func startUsingBonusTime() {
-            if isConsumingTimeBonus, lastFaceUpDate == nil {
+            if isConsumingBonusTime, lastFaceUpDate == nil {
                 lastFaceUpDate = Date()
             }
         }
