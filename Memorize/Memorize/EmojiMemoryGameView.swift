@@ -16,7 +16,9 @@ struct EmojiMemoryGameView: View {
             Text(viewModel.themeName).font(.title)
             Grid(viewModel.cards) { card in
                 CardView(card: card).onTapGesture {
-                    self.viewModel.choose(card: card)
+                    withAnimation(.linear(duration: 2)) {
+                        self.viewModel.choose(card: card)
+                    }
                 }.padding(5)
             }
             HStack {
@@ -29,7 +31,7 @@ struct EmojiMemoryGameView: View {
     
     private var NewGameButton: some View {
         Button(action: {
-            withAnimation(.easeInOut) {
+            withAnimation(.easeInOut(duration: 2)) {
                 self.viewModel.newGame()
             }
         }, label: {
@@ -69,6 +71,7 @@ struct CardView: View {
             }
             .cardify(isFaceUp: card.isFaceUp)
             .foregroundColor(Color.from(themeColor: card.color))
+            .transition(AnyTransition.scale)
         }
     }
     
