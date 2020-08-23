@@ -63,7 +63,7 @@ struct CardView: View {
                 Text(card.content).font(Font.system(size: fontSize(for: size)))
             }
             .cardify(isFaceUp: card.isFaceUp)
-            .foregroundColor(Color.fromThemeColor(color: card.color))
+            .foregroundColor(Color.from(themeColor: card.color))
         }
     }
     
