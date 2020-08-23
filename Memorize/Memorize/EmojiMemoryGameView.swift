@@ -16,7 +16,7 @@ struct EmojiMemoryGameView: View {
             Text(viewModel.themeName).font(.title)
             Grid(viewModel.cards) { card in
                 CardView(card: card).onTapGesture {
-                    withAnimation(.linear(duration: 2)) {
+                    withAnimation(.linear(duration: 0.75)) {
                         self.viewModel.choose(card: card)
                     }
                 }.padding(5)
@@ -31,7 +31,7 @@ struct EmojiMemoryGameView: View {
     
     private var NewGameButton: some View {
         Button(action: {
-            withAnimation(.easeInOut(duration: 2)) {
+            withAnimation(.easeInOut) {
                 self.viewModel.newGame()
             }
         }, label: {
