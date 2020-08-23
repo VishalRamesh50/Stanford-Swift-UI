@@ -29,7 +29,9 @@ struct EmojiMemoryGameView: View {
     
     private var NewGameButton: some View {
         Button(action: {
-            self.viewModel.newGame()
+            withAnimation(.easeInOut) {
+                self.viewModel.newGame()
+            }
         }, label: {
             Text("NEW GAME")
                 .padding(10)
