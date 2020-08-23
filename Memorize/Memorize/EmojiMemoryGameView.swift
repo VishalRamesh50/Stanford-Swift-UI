@@ -17,26 +17,31 @@ struct EmojiMemoryGameView: View {
             Grid(viewModel.cards) { card in
                 CardView(card: card).onTapGesture {
                     self.viewModel.choose(card: card)
-                }
-                    .padding(5)
+                }.padding(5)
             }
             HStack {
-                Button(action: {
-                    self.viewModel.newGame()
-                }, label: {
-                    Text("NEW GAME")
-                        .padding(10)
-                        .padding(.horizontal, 10)
-                        .background(Color.green)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(30)
-                })
+                NewGameButton
                 Spacer()
-                Text("(Score: \(viewModel.score))").font(.body)
-            }
-            .padding(.horizontal, 10)
-        }
-            .padding()
+                Score
+            }.padding(.horizontal, 10)
+        }.padding()
+    }
+    
+    private var NewGameButton: some View {
+        Button(action: {
+            self.viewModel.newGame()
+        }, label: {
+            Text("NEW GAME")
+                .padding(10)
+                .padding(.horizontal, 10)
+                .background(Color.green)
+                .foregroundColor(Color.white)
+                .cornerRadius(30)
+        })
+    }
+    
+    private var Score: some View {
+        Text("(Score: \(viewModel.score))").font(.body)
     }
 }
 
@@ -49,36 +54,29 @@ struct CardView: View {
         }
     }
     
-    func body(for size: CGSize) -> some View {
-        ZStack {
-            if card.isFaceUp {
-                RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
-                RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
-                Text(card.content)
+    @ViewBuilder
+    private func body(for size: CGSize) -> some View {
+        if card.isFaceUp || !card.isMatched {
+            ZStack {
+                Pie(startAngle: Angle.degrees(0-90), endAngle:Angle.degrees(110-90), clockwise: true)
+                    .padding(5).opacity(0.4)
+                Text(card.content).font(Font.system(size: fontSize(for: size)))
             }
-            else {
-                if !card.isMatched {
-                    RoundedRectangle(cornerRadius: cornerRadius).fill()
-                }
-            }
+            .cardify(isFaceUp: card.isFaceUp)
+            .foregroundColor(Color.from(themeColor: card.color))
         }
-        .font(Font.system(size: fontSize(for: size)))
-        .foregroundColor(Color.fromThemeColor(color: card.color))
     }
     
     // MARK: - Drawing Constants
-    let cornerRadius: CGFloat = 10.0
-    let edgeLineWidth: CGFloat = 3
-    func fontSize(for size: CGSize) -> CGFloat {
-        min(size.width, size.height) * 0.75
+    private func fontSize(for size: CGSize) -> CGFloat {
+        min(size.width, size.height) * 0.7
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            EmojiMemoryGameView(viewModel: EmojiMemoryGame()).colorScheme(.light)
-            EmojiMemoryGameView(viewModel: EmojiMemoryGame()).colorScheme(.dark)
-        }
+        let game = EmojiMemoryGame()
+        game.choose(card: game.cards[0])
+        return EmojiMemoryGameView(viewModel: game)
     }
 }
