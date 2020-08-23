@@ -54,14 +54,17 @@ struct CardView: View {
         }
     }
     
+    @ViewBuilder
     private func body(for size: CGSize) -> some View {
-        ZStack {
-            Pie(startAngle: Angle.degrees(0-90), endAngle:Angle.degrees(110-90), clockwise: true)
-                .padding(5).opacity(0.4)
-            Text(card.content).font(Font.system(size: fontSize(for: size)))
+        if card.isFaceUp || !card.isMatched {
+            ZStack {
+                Pie(startAngle: Angle.degrees(0-90), endAngle:Angle.degrees(110-90), clockwise: true)
+                    .padding(5).opacity(0.4)
+                Text(card.content).font(Font.system(size: fontSize(for: size)))
+            }
+            .cardify(isFaceUp: card.isFaceUp)
+            .foregroundColor(Color.fromThemeColor(color: card.color))
         }
-        .cardify(isFaceUp: false)
-        .foregroundColor(Color.fromThemeColor(color: card.color))
     }
     
     // MARK: - Drawing Constants
