@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		CAE3517924F433200009425E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE3517824F433200009425E /* AppDelegate.swift */; };
 		CAE3517B24F433200009425E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE3517A24F433200009425E /* SceneDelegate.swift */; };
-		CAE3517D24F433200009425E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE3517C24F433200009425E /* ContentView.swift */; };
+		CAE3517D24F433200009425E /* SetGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE3517C24F433200009425E /* SetGameView.swift */; };
 		CAE3517F24F433250009425E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAE3517E24F433250009425E /* Assets.xcassets */; };
 		CAE3518224F433250009425E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAE3518124F433250009425E /* Preview Assets.xcassets */; };
 		CAE3518524F433250009425E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAE3518324F433250009425E /* LaunchScreen.storyboard */; };
@@ -19,7 +19,7 @@
 		CAE3517524F433200009425E /* Set Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Set Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAE3517824F433200009425E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAE3517A24F433200009425E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CAE3517C24F433200009425E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CAE3517C24F433200009425E /* SetGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameView.swift; sourceTree = "<group>"; };
 		CAE3517E24F433250009425E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CAE3518124F433250009425E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CAE3518424F433250009425E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 			children = (
 				CAE3517824F433200009425E /* AppDelegate.swift */,
 				CAE3517A24F433200009425E /* SceneDelegate.swift */,
-				CAE3517C24F433200009425E /* ContentView.swift */,
+				CAE3517C24F433200009425E /* SetGameView.swift */,
 				CAE3517E24F433250009425E /* Assets.xcassets */,
 				CAE3518324F433250009425E /* LaunchScreen.storyboard */,
 				CAE3518624F433250009425E /* Info.plist */,
@@ -148,7 +148,7 @@
 			files = (
 				CAE3517924F433200009425E /* AppDelegate.swift in Sources */,
 				CAE3517B24F433200009425E /* SceneDelegate.swift in Sources */,
-				CAE3517D24F433200009425E /* ContentView.swift in Sources */,
+				CAE3517D24F433200009425E /* SetGameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
