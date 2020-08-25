@@ -26,12 +26,22 @@ struct CardView: View {
     var body: some View {
         let shape: String = String(reflecting: card.shape).components(separatedBy: ".")[2]
         let shading: String = String(reflecting: card.shading).components(separatedBy: ".")[2]
-        let color: Color = Color.from(setColor: card.color)
         return ZStack {
-            RoundedRectangle(cornerRadius: 20).fill(color).opacity(card.shading == SetShading.open ? 0 : 1)
-            Text("ID: \(card.id)\n# of Shapes: \(card.numShapes)\nShape: \(shape)\nShading: \(shading)").font(Font.body)
+            RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white).shadow(radius: shadowRadius)
+            GeometryReader { geometry in
+                VStack {
+                    ForEach(0..<self.card.numShapes) { _ in
+                        Oval(size: geometry.size, shading: self.card.shading, color: self.card.color)
+                    }
+                }
+            }
+            Text("ID: \(card.id)\nShape: \(shape)\nShading: \(shading)").font(Font.body)
         }.transition(AnyTransition.scale)
     }
+    
+    // MARK: - Drawing Constants
+    let cornerRadius: CGFloat = 20
+    let shadowRadius: CGFloat = 5
 }
 
 struct Oval: View {
