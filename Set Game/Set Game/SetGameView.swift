@@ -34,7 +34,29 @@ struct CardView: View {
     }
 }
 
+struct Oval: View {
+    let size: CGSize
+    let shading: SetShading
+    let color: SetColor
+    
+    var body: some View {
+        ZStack {
+            Capsule()
+                .stroke(Color.from(setColor: color))
+                .frame(width: width, height: height)
+                .padding(.vertical, 5)
+            if shading != .open {
+                Capsule()
+                    .fill(Color.from(setColor: color).opacity(shading == .striped ? openOpacity: 1))
+                    .frame(width: width, height: height)
+            }
+        }
     }
+    
+    // MARK: - Drawing Constants
+    var width: CGFloat { size.width * 0.7 }
+    var height: CGFloat { size.height * 0.2 }
+    let openOpacity: Double = 0.3
 }
 
 struct ContentView_Previews: PreviewProvider {
