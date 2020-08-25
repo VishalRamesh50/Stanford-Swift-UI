@@ -15,6 +15,9 @@
 		CAE3518524F433250009425E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAE3518324F433250009425E /* LaunchScreen.storyboard */; };
 		CAFA1C7624F4686800935507 /* SetGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA1C7524F4686800935507 /* SetGameViewModel.swift */; };
 		CAFA1C7824F468D400935507 /* SetGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA1C7724F468D400935507 /* SetGameModel.swift */; };
+		CAFA1C7A24F483D800935507 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA1C7924F483D700935507 /* Grid.swift */; };
+		CAFA1C7C24F483F400935507 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA1C7B24F483F400935507 /* GridLayout.swift */; };
+		CAFA1C7E24F4845500935507 /* Array+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA1C7D24F4845500935507 /* Array+Identifiable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		CAE3518624F433250009425E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CAFA1C7524F4686800935507 /* SetGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameViewModel.swift; sourceTree = "<group>"; };
 		CAFA1C7724F468D400935507 /* SetGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameModel.swift; sourceTree = "<group>"; };
+		CAFA1C7924F483D700935507 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		CAFA1C7B24F483F400935507 /* GridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
+		CAFA1C7D24F4845500935507 /* Array+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +66,12 @@
 		CAE3517724F433200009425E /* Set Game */ = {
 			isa = PBXGroup;
 			children = (
+				CAFA1C7D24F4845500935507 /* Array+Identifiable.swift */,
 				CAE3517824F433200009425E /* AppDelegate.swift */,
 				CAE3517A24F433200009425E /* SceneDelegate.swift */,
 				CAE3517C24F433200009425E /* SetGameView.swift */,
+				CAFA1C7924F483D700935507 /* Grid.swift */,
+				CAFA1C7B24F483F400935507 /* GridLayout.swift */,
 				CAFA1C7524F4686800935507 /* SetGameViewModel.swift */,
 				CAFA1C7724F468D400935507 /* SetGameModel.swift */,
 				CAE3517E24F433250009425E /* Assets.xcassets */,
@@ -157,6 +166,9 @@
 				CAE3517B24F433200009425E /* SceneDelegate.swift in Sources */,
 				CAE3517D24F433200009425E /* SetGameView.swift in Sources */,
 				CAFA1C7624F4686800935507 /* SetGameViewModel.swift in Sources */,
+				CAFA1C7E24F4845500935507 /* Array+Identifiable.swift in Sources */,
+				CAFA1C7C24F483F400935507 /* GridLayout.swift in Sources */,
+				CAFA1C7A24F483D800935507 /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
