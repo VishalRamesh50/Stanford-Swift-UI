@@ -14,7 +14,7 @@ struct SetGameView: View {
     var body: some View {
         withAnimation(.easeInOut(duration: 2)) {
             Grid(viewModel.dealtCards) { card in
-                CardView(card: card)
+                CardView(card: card).aspectRatio(2/3, contentMode: .fit)
             }
         }
     }
