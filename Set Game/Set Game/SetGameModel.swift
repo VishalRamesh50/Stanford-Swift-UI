@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct SetGameModel {
     private(set) var deck: Array<Card>
@@ -18,23 +19,28 @@ struct SetGameModel {
             for shading in SetShading.allCases {
                 for color in SetColor.allCases {
                     for numShape in 1...3 {
-                        deck.append(Card(numShapes: numShape, shape: shape, shading: shading, color: color)!)
+                        deck.append(Card(numShapes: numShape, shape: shape, shading: shading, color: color, id: deck.count)!)
                     }
                 }
             }
         }
         self.deck = deck.shuffled()
+        for _ in 0..<12 {
+            let card: Card = self.deck.remove(at: 0)
+            self.dealtCards.append(card)
+        }
     }
 }
 
-struct Card {
+struct Card: Identifiable {
+    let id: Int
     let numShapes: Int
     let shape: SetShape
     let shading: SetShading
     let color: SetColor
     var isSelected: Bool = false
     
-    init?(numShapes: Int, shape: SetShape, shading: SetShading, color: SetColor) {
+    init?(numShapes: Int, shape: SetShape, shading: SetShading, color: SetColor, id: Int) {
         if !(1...3 ~= numShapes) {
             return nil
         }
@@ -42,6 +48,7 @@ struct Card {
         self.shape = shape
         self.shading = shading
         self.color = color
+        self.id = id
     }
 }
 
@@ -55,4 +62,17 @@ enum SetShading: CaseIterable {
 
 enum SetColor: CaseIterable {
     case red, green, purple
+}
+
+extension Color {
+    static func from(setColor: SetColor) -> Color {
+        switch setColor {
+        case .red:
+            return Color.red
+        case .green:
+            return Color.green
+        case .purple:
+            return Color.purple
+        }
+    }
 }

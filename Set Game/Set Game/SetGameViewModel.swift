@@ -10,4 +10,8 @@ import Foundation
 
 class SetGameViewModel: ObservableObject {
     @Published private var model: SetGameModel = SetGameModel()
+    
+    var dealtCards: Array<Card> {
+        model.dealtCards
+    }
 }
