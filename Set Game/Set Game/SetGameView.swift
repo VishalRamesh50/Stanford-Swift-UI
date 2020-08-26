@@ -12,9 +12,20 @@ struct SetGameView: View {
     @ObservedObject var viewModel: SetGameViewModel
 
     var body: some View {
-        withAnimation(.easeInOut(duration: 2)) {
-            Grid(viewModel.dealtCards) { card in
-                CardView(card: card).aspectRatio(2/3, contentMode: .fit)
+        Grid(self.viewModel.dealtCards) { card in
+            CardView(card: card).onTapGesture {
+                self.viewModel.tap(card: card)
+            }
+        }.onAppear {
+            var count = 0
+            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true){ t in
+                if count == 11 {
+                    t.invalidate()
+                }
+                withAnimation(Animation.easeInOut) {
+                    self.viewModel.deal()
+                }
+                count += 1
             }
         }
     }
@@ -27,7 +38,16 @@ struct CardView: View {
         let shape: String = String(reflecting: card.shape).components(separatedBy: ".")[2]
         let shading: String = String(reflecting: card.shading).components(separatedBy: ".")[2]
         return ZStack {
-            RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white).shadow(radius: shadowRadius)
+            ZStack {
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(Color.white)
+                    .shadow(radius: card.isSelected ? 0 : shadowRadius)
+                    .animation(.spring())
+                if card.isSelected {
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .strokeBorder(Color.yellow, lineWidth: 3)
+                }
+            }
             GeometryReader { geometry in
                 VStack {
                     ForEach(0..<self.card.numShapes) { _ in
@@ -36,12 +56,15 @@ struct CardView: View {
                 }
             }
             Text("ID: \(card.id)\nShape: \(shape)\nShading: \(shading)").font(Font.body)
-        }.transition(AnyTransition.scale)
+        }
+        .aspectRatio(2/3, contentMode: .fit)
+        .transition(AnyTransition.scale)
+        .padding(3)
     }
     
     // MARK: - Drawing Constants
     let cornerRadius: CGFloat = 20
-    let shadowRadius: CGFloat = 5
+    let shadowRadius: CGFloat = 10
 }
 
 struct Oval: View {
