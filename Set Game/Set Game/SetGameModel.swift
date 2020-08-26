@@ -25,9 +25,32 @@ struct SetGameModel {
             }
         }
         self.deck = deck.shuffled()
-        for _ in 0..<12 {
-            let card: Card = self.deck.remove(at: 0)
-            self.dealtCards.append(card)
+    }
+    
+    mutating func deal() {
+        self.dealtCards.append(self.deck.remove(at: 0))
+    }
+    
+    mutating func tap(card: Card) {
+        // if the initial deal hasn't been completed don't let users select cards
+        if self.dealtCards.count < 12 {
+            return
+        }
+        
+        // toggle the select state of the given card
+        let cardIndex = self.dealtCards.firstIndex(matching: card)!
+        self.dealtCards[cardIndex].isSelected.toggle()
+        let selectedCards: Array<Card> = self.dealtCards.filter { $0.isSelected }
+        
+        // if the card selected was the 4th one, unselect all the cards except
+        // the most recently selected card
+        if selectedCards.count == 4 {
+            for i in 0...3 {
+                let index = self.dealtCards.firstIndex(matching: selectedCards[i])!
+                if self.dealtCards[index].id != self.dealtCards[cardIndex].id {
+                    self.dealtCards[index].isSelected = false
+                }
+            }
         }
     }
 }
