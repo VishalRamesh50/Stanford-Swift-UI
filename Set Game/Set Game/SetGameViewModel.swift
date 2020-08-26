@@ -11,7 +11,18 @@ import Foundation
 class SetGameViewModel: ObservableObject {
     @Published private var model: SetGameModel = SetGameModel()
     
+    
+    // MARK: - Access to the Model
     var dealtCards: Array<Card> {
         model.dealtCards
+    }
+    
+    // MARK: - Intents
+    func deal() {
+        model.deal()
+    }
+    
+    func tap(card: Card) {
+        model.tap(card: card)
     }
 }
