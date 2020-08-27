@@ -33,6 +33,8 @@ struct SetGameView: View {
 
 struct CardView: View {
     var card: Card
+    @State private var offsetX: CGFloat = CGFloat.random(in: -1000...1000)
+    @State private var offsetY: CGFloat = CGFloat.random(in: -1000...1000)
     
     var body: some View {
         let shape: String = String(reflecting: card.shape).components(separatedBy: ".")[2]
@@ -42,7 +44,6 @@ struct CardView: View {
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .fill(Color.white)
                     .shadow(radius: card.isSelected ? 0 : shadowRadius)
-                    .animation(.spring())
                 if card.isSelected {
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .strokeBorder(Color.yellow, lineWidth: 3)
@@ -57,9 +58,14 @@ struct CardView: View {
             }
             Text("ID: \(card.id)\nShape: \(shape)\nShading: \(shading)").font(Font.body)
         }
-        .aspectRatio(2/3, contentMode: .fit)
-        .transition(AnyTransition.scale)
-        .padding(3)
+            .aspectRatio(2/3, contentMode: .fit)
+            .offset(x: offsetX, y: offsetY)
+            .padding(3)
+            .animation(.spring())
+            .onAppear() {
+                self.offsetX = 0
+                self.offsetY = 0
+            }
     }
     
     // MARK: - Drawing Constants
