@@ -38,8 +38,6 @@ struct CardView: View {
     @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
-        let shape: String = String(reflecting: card.shape).components(separatedBy: ".")[2]
-        let shading: String = String(reflecting: card.shading).components(separatedBy: ".")[2]
         var selectedColor: Color = Color.yellow
         if card.isSelected {
             if let isMatched = card.isMatched {
@@ -63,11 +61,10 @@ struct CardView: View {
             GeometryReader { geometry in
                 VStack {
                     ForEach(0..<self.card.numShapes) { _ in
-                        Oval(size: geometry.size, shading: self.card.shading, color: self.card.color)
+                        CardShape(size: geometry.size, card: self.card)
                     }
                 }
             }
-            Text("ID: \(card.id)\nShape: \(shape)\nShading: \(shading)").font(Font.body)
         }
             .aspectRatio(2/3, contentMode: .fit)
             .offset(x: offsetX, y: offsetY)
@@ -85,21 +82,48 @@ struct CardView: View {
     let shadowRadius: CGFloat = 10
 }
 
-struct Oval: View {
+struct CardShape: View {
     let size: CGSize
-    let shading: SetShading
-    let color: SetColor
+    let card: Card
     
     var body: some View {
-        ZStack {
-            Capsule()
-                .stroke(Color.from(setColor: color), lineWidth: 2)
-                .frame(width: width, height: height)
-                .padding(.vertical, 5)
-            if shading != .open {
-                Capsule()
-                    .fill(Color.from(setColor: color).opacity(shading == .striped ? openOpacity: 1))
-                    .frame(width: width, height: height)
+        VStack {
+            if card.shape == SetShape.squiggle {
+                ZStack {
+                    Rectangle()
+                        .stroke(Color.from(setColor: card.color), lineWidth: 2)
+                        .frame(width: width, height: height)
+                        .padding(.vertical, 5)
+                    if card.shading != .open {
+                        Rectangle()
+                            .fill(Color.from(setColor: card.color).opacity(card.shading == .striped ? openOpacity: 1))
+                            .frame(width: width, height: height)
+                    }
+                }
+            } else if card.shape == SetShape.diamond {
+                ZStack {
+                    Diamond()
+                        .stroke(Color.from(setColor: card.color), lineWidth: 2)
+                        .frame(width: width, height: height)
+                        .padding(.vertical, 5)
+                    if card.shading != .open {
+                        Diamond()
+                            .fill(Color.from(setColor: card.color).opacity(card.shading == .striped ? openOpacity: 1))
+                            .frame(width: width, height: height)
+                    }
+                }
+            } else if card.shape == SetShape.oval {
+                ZStack {
+                    Capsule()
+                        .stroke(Color.from(setColor: card.color), lineWidth: 2)
+                        .frame(width: width, height: height)
+                        .padding(.vertical, 5)
+                    if card.shading != .open {
+                        Capsule()
+                            .fill(Color.from(setColor: card.color).opacity(card.shading == .striped ? openOpacity: 1))
+                            .frame(width: width, height: height)
+                    }
+                }
             }
         }
     }
@@ -108,6 +132,18 @@ struct Oval: View {
     var width: CGFloat { size.width * 0.7 }
     var height: CGFloat { size.height * 0.2 }
     let openOpacity: Double = 0.3
+}
+
+struct Diamond: Shape {
+    func path(in rect: CGRect) -> Path {
+        var p = Path()
+        p.move(to: CGPoint(x: 0, y: rect.midY))
+        p.addLine(to: CGPoint(x: rect.midX, y: 0))
+        p.addLine(to: CGPoint(x: rect.width, y: rect.midY))
+        p.addLine(to: CGPoint(x: rect.midX, y: rect.height))
+        p.addLine(to: CGPoint(x: 0, y: rect.midY))
+        return p
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
