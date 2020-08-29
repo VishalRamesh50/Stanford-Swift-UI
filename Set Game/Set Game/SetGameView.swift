@@ -35,6 +35,7 @@ struct CardView: View {
     var card: Card
     @State private var offsetX: CGFloat = CGFloat.random(in: -1000...1000)
     @State private var offsetY: CGFloat = CGFloat.random(in: -1000...1000)
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         let shape: String = String(reflecting: card.shape).components(separatedBy: ".")[2]
@@ -42,11 +43,15 @@ struct CardView: View {
         return ZStack {
             ZStack {
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(Color.white)
+                    .fill(colorScheme == .dark ? Color(UIColor.systemGray5) : Color.white)
                     .shadow(radius: card.isSelected ? 0 : shadowRadius)
                 if card.isSelected {
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .strokeBorder(Color.yellow, lineWidth: 3)
+                }
+                if colorScheme == .dark {
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .strokeBorder(Color.white, lineWidth: 1)
                 }
             }
             GeometryReader { geometry in
@@ -81,7 +86,7 @@ struct Oval: View {
     var body: some View {
         ZStack {
             Capsule()
-                .stroke(Color.from(setColor: color))
+                .stroke(Color.from(setColor: color), lineWidth: 2)
                 .frame(width: width, height: height)
                 .padding(.vertical, 5)
             if shading != .open {
