@@ -87,43 +87,23 @@ struct CardShape: View {
     let card: Card
     
     var body: some View {
-        VStack {
-            if card.shape == SetShape.squiggle {
-                ZStack {
-                    Rectangle()
-                        .stroke(Color.from(setColor: card.color), lineWidth: 2)
-                        .frame(width: width, height: height)
-                        .padding(.vertical, 5)
-                    if card.shading != .open {
-                        Rectangle()
-                            .fill(Color.from(setColor: card.color).opacity(card.shading == .striped ? openOpacity: 1))
-                            .frame(width: width, height: height)
-                    }
-                }
-            } else if card.shape == SetShape.diamond {
-                ZStack {
-                    Diamond()
-                        .stroke(Color.from(setColor: card.color), lineWidth: 2)
-                        .frame(width: width, height: height)
-                        .padding(.vertical, 5)
-                    if card.shading != .open {
-                        Diamond()
-                            .fill(Color.from(setColor: card.color).opacity(card.shading == .striped ? openOpacity: 1))
-                            .frame(width: width, height: height)
-                    }
-                }
-            } else if card.shape == SetShape.oval {
-                ZStack {
-                    Capsule()
-                        .stroke(Color.from(setColor: card.color), lineWidth: 2)
-                        .frame(width: width, height: height)
-                        .padding(.vertical, 5)
-                    if card.shading != .open {
-                        Capsule()
-                            .fill(Color.from(setColor: card.color).opacity(card.shading == .striped ? openOpacity: 1))
-                            .frame(width: width, height: height)
-                    }
-                }
+        return VStack {
+            if card.shape == .squiggle { body(shape: Rectangle()) }
+            else if card.shape == .diamond { body(shape: Diamond()) }
+            else if card.shape == .oval { body(shape: Capsule()) }
+        }
+    }
+    
+    private func body<T: Shape>(shape: T) -> some View {
+        ZStack {
+            shape
+                .stroke(Color.from(setColor: card.color), lineWidth: 2)
+                .frame(width: width, height: height)
+                .padding(.vertical, 5)
+            if card.shading != .open {
+                shape
+                    .fill(Color.from(setColor: card.color).opacity(card.shading == .striped ? openOpacity: 1))
+                    .frame(width: width, height: height)
             }
         }
     }
