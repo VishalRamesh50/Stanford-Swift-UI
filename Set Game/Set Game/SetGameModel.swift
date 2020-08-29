@@ -49,6 +49,8 @@ struct SetGameModel {
                 let index = self.dealtCards.firstIndex(matching: selectedCards[i])!
                 if self.dealtCards[index].id != self.dealtCards[cardIndex].id {
                     self.dealtCards[index].isSelected = false
+                    // FIXME: Only replace these cards when they are a valid match
+                    self.dealtCards[index] = self.deck.remove(at: 0)
                 }
             }
         }

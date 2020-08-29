@@ -67,6 +67,7 @@ struct CardView: View {
             .offset(x: offsetX, y: offsetY)
             .padding(3)
             .animation(.spring())
+            .transition(.offset(x: CGFloat.random(in: -5000...5000), y: CGFloat.random(in: -5000...5000)))
             .onAppear() {
                 self.offsetX = 0
                 self.offsetY = 0
