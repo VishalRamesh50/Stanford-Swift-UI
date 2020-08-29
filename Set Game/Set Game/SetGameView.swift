@@ -38,25 +38,13 @@ struct CardView: View {
     @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
-        var selectedColor: Color = Color.yellow
-        if card.isSelected {
-            if let isMatched = card.isMatched {
-                selectedColor = isMatched ? Color.green : Color.red
-            }
-        }
         return ZStack {
             ZStack {
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .fill(colorScheme == .dark ? Color(UIColor.systemGray5) : Color.white)
                     .shadow(radius: card.isSelected ? 0 : shadowRadius)
-                if card.isSelected {
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .strokeBorder(selectedColor, lineWidth: 3)
-                }
-                if colorScheme == .dark {
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .strokeBorder(Color.white, lineWidth: 1)
-                }
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .strokeBorder(strokeColor, lineWidth: lineWidth)
             }
             GeometryReader { geometry in
                 VStack {
@@ -80,6 +68,18 @@ struct CardView: View {
     // MARK: - Drawing Constants
     let cornerRadius: CGFloat = 20
     let shadowRadius: CGFloat = 10
+    var strokeColor: Color {
+        if card.isSelected {
+            if let isMatched = card.isMatched {
+                return isMatched ? Color.green : Color.red
+            } else {
+                return Color.yellow
+            }
+        } else {
+            return Color.white
+        }
+    }
+    var lineWidth: CGFloat { strokeColor == Color.white ? 1 : 3 }
 }
 
 struct CardShape: View {
