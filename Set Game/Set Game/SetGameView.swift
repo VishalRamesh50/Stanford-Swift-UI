@@ -40,6 +40,12 @@ struct CardView: View {
     var body: some View {
         let shape: String = String(reflecting: card.shape).components(separatedBy: ".")[2]
         let shading: String = String(reflecting: card.shading).components(separatedBy: ".")[2]
+        var selectedColor: Color = Color.yellow
+        if card.isSelected {
+            if let isMatched = card.isMatched {
+                selectedColor = isMatched ? Color.green : Color.red
+            }
+        }
         return ZStack {
             ZStack {
                 RoundedRectangle(cornerRadius: cornerRadius)
@@ -47,7 +53,7 @@ struct CardView: View {
                     .shadow(radius: card.isSelected ? 0 : shadowRadius)
                 if card.isSelected {
                     RoundedRectangle(cornerRadius: cornerRadius)
-                        .strokeBorder(Color.yellow, lineWidth: 3)
+                        .strokeBorder(selectedColor, lineWidth: 3)
                 }
                 if colorScheme == .dark {
                     RoundedRectangle(cornerRadius: cornerRadius)

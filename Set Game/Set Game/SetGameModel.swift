@@ -12,6 +12,9 @@ import SwiftUI
 struct SetGameModel {
     private(set) var deck: Array<Card>
     private(set) var dealtCards: Array<Card> = Array<Card>()
+    private var selectedCards: Array<Card> {
+        self.dealtCards.filter { $0.isSelected }
+    }
     
     init() {
         var deck: Array<Card> = Array<Card>()
@@ -28,29 +31,59 @@ struct SetGameModel {
     }
     
     mutating func deal() {
-        self.dealtCards.append(self.deck.remove(at: 0))
+        self.dealtCards.append(self.deck.removeLast())
     }
     
     mutating func tap(card: Card) {
         // if the initial deal hasn't been completed don't let users select cards
-        if self.dealtCards.count < 12 {
+        if self.dealtCards.count < 12 && !self.deck.isEmpty {
+            return
+        }
+        
+        // if 3 cards have already been selected, don't allow deselection
+        if selectedCards.count == 3, let _ = selectedCards.firstIndex(matching: card) {
             return
         }
         
         // toggle the select state of the given card
-        let cardIndex = self.dealtCards.firstIndex(matching: card)!
-        self.dealtCards[cardIndex].isSelected.toggle()
-        let selectedCards: Array<Card> = self.dealtCards.filter { $0.isSelected }
+        self.dealtCards[self.dealtCards.firstIndex(matching: card)!].isSelected.toggle()
         
-        // if the card selected was the 4th one, unselect all the cards except
-        // the most recently selected card
+        // determine if the 3 selected cards were a match or not
+        if selectedCards.count == 3 {
+            for selectedCard in selectedCards {
+                let sameNumShapes = selectedCards.filter { $0.numShapes == selectedCard.numShapes }
+                let sameShape = selectedCards.filter { $0.shape == selectedCard.shape }
+                let sameShading = selectedCards.filter { $0.shading == selectedCard.shading }
+                let sameColor = selectedCards.filter { $0.color == selectedCard.color }
+                let isMatch = sameNumShapes.count != 2 && sameShape.count != 2 && sameShading.count != 2 && sameColor.count != 2
+                for selectedCard in selectedCards {
+                    self.dealtCards[self.dealtCards.firstIndex(matching: selectedCard)!].isMatched = isMatch
+                }
+                if !isMatch {
+                    return
+                }
+            }
+        }
+        
+        // If the card selected was the 4th one, unselect all the cards except the
+        // most recently selected card. Replace cards that were a match with cards
+        // from the deck if the deck isn't empty. Revert the matched state if they were not.
         if selectedCards.count == 4 {
-            for i in 0...3 {
-                let index = self.dealtCards.firstIndex(matching: selectedCards[i])!
-                if self.dealtCards[index].id != self.dealtCards[cardIndex].id {
-                    self.dealtCards[index].isSelected = false
-                    // FIXME: Only replace these cards when they are a valid match
-                    self.dealtCards[index] = self.deck.remove(at: 0)
+            for cardToUnselect in selectedCards {
+                if cardToUnselect.id == card.id {
+                    continue
+                }
+                
+                let dealtIndex = self.dealtCards.firstIndex(matching: cardToUnselect)!
+                self.dealtCards[dealtIndex].isSelected = false
+                if self.dealtCards[dealtIndex].isMatched! {
+                    if self.deck.isEmpty {
+                        self.dealtCards.remove(at: dealtIndex)
+                    } else {
+                        self.dealtCards[dealtIndex] = self.deck.removeLast()
+                    }
+                } else {
+                    self.dealtCards[dealtIndex].isMatched = nil
                 }
             }
         }
@@ -64,6 +97,7 @@ struct Card: Identifiable {
     let shading: SetShading
     let color: SetColor
     var isSelected: Bool = false
+    var isMatched: Bool?
     
     init?(numShapes: Int, shape: SetShape, shading: SetShading, color: SetColor, id: Int) {
         if !(1...3 ~= numShapes) {
