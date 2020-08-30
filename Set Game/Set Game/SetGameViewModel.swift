@@ -33,4 +33,8 @@ class SetGameViewModel: ObservableObject {
     func deal3More() {
         model.deal3More()
     }
+    
+    func newGame() {
+        self.model = SetGameModel()
+    }
 }

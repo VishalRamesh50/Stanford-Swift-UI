@@ -18,23 +18,45 @@ struct SetGameView: View {
                     self.viewModel.tap(card: card)
                 }
             }.onAppear {
-                var count = 0
-                Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true){ t in
-                    if count == 11 {
-                        t.invalidate()
-                    }
-                    withAnimation(Animation.easeInOut) {
-                        self.viewModel.deal()
-                    }
-                    count += 1
-                }
+                self.newGameDeal()
             }
-            Deal3MoreButton
+            HStack {
+                NewGame
+                Spacer()
+                Deal3MoreButton
+            }.padding(.horizontal, 10)
+        }.padding(5)
+    }
+    
+    private func newGameDeal() {
+        var count = 0
+        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true){ t in
+            if count == 11 {
+                t.invalidate()
+            }
+            withAnimation(Animation.easeInOut) {
+                self.viewModel.deal()
+            }
+            count += 1
         }
     }
     
+    private var NewGame: some View {
+        return Button(action: {
+            self.viewModel.newGame()
+            self.newGameDeal()
+        }, label: {
+            Text("NEW GAME")
+                .padding(10)
+                .padding(.horizontal, 10)
+                .background(Color.green)
+                .foregroundColor(Color.white)
+                .cornerRadius(30)
+        })
+    }
+    
     private var Deal3MoreButton: some View {
-        let isDisabled: Bool  = self.viewModel.isDeckEmpty
+        let isDisabled: Bool  = self.viewModel.isDeckEmpty || self.viewModel.dealtCards.count < 12
         return Button(action: {
             self.viewModel.deal3More()
         }, label: {
