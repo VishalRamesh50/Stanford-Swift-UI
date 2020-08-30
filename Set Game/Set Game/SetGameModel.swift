@@ -36,12 +36,22 @@ struct SetGameModel {
     
     mutating func choose(card: Card) {
         // if 3 cards have already been selected, don't allow deselection
-        if selectedCards.count == 3, let _ = selectedCards.firstIndex(matching: card) {
-            return
+        let fourthClick = selectedCards.count == 3 && card.isSelected
+        if !fourthClick {
+            // toggle the select state of the given card
+            self.dealtCards[self.dealtCards.firstIndex(matching: card)!].isSelected.toggle()
         }
         
-        // toggle the select state of the given card
-        self.dealtCards[self.dealtCards.firstIndex(matching: card)!].isSelected.toggle()
+        // if the selected card was already an unmatched card, then
+        // deselect all cards except the one chosen
+        if !(card.isMatched ?? true) {
+            for selectedCard in selectedCards {
+                let dealtCardIndex = self.dealtCards.firstIndex(matching: selectedCard)!
+                self.dealtCards[dealtCardIndex].isSelected = selectedCard.id == card.id
+                self.dealtCards[dealtCardIndex].isMatched = nil
+            }
+            return
+        }
         
         // determine if the 3 selected cards were a match or not
         if selectedCards.count == 3 {
@@ -63,9 +73,9 @@ struct SetGameModel {
         // If the card selected was the 4th one, unselect all the cards except the
         // most recently selected card. Replace cards that were a match with cards
         // from the deck if the deck isn't empty. Revert the matched state if they were not.
-        if selectedCards.count == 4 {
+        if selectedCards.count == 4 || fourthClick {
             for cardToUnselect in selectedCards {
-                if cardToUnselect.id == card.id {
+                if cardToUnselect.id == card.id && !fourthClick {
                     continue
                 }
                 
