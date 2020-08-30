@@ -138,7 +138,7 @@ struct CardShape: View {
             shape
                 .stroke(Color.from(setColor: card.color), lineWidth: 2)
                 .frame(width: width, height: height)
-                .padding(.vertical, 5)
+                .padding(.vertical, paddingHeight)
             if card.shading != .open {
                 shape
                     .fill(Color.from(setColor: card.color).opacity(card.shading == .striped ? openOpacity: 1))
@@ -150,6 +150,7 @@ struct CardShape: View {
     // MARK: - Drawing Constants
     var width: CGFloat { size.width * 0.7 }
     var height: CGFloat { size.height * 0.2 }
+    var paddingHeight: CGFloat { size.height * 0.02 }
     let openOpacity: Double = 0.3
 }
 
