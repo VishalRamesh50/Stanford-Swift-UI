@@ -115,7 +115,7 @@ struct CardView: View {
     }
     
     // MARK: - Drawing Constants
-    let cornerRadius: CGFloat = 20
+    let cornerRadius: CGFloat = 10
     let shadowRadius: CGFloat = 10
     var strokeColor: Color {
         if card.isSelected {
