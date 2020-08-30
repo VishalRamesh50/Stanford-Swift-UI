@@ -34,7 +34,7 @@ struct SetGameModel {
         self.dealtCards.append(self.deck.removeLast())
     }
     
-    mutating func tap(card: Card) {
+    mutating func choose(card: Card) {
         // if 3 cards have already been selected, don't allow deselection
         if selectedCards.count == 3, let _ = selectedCards.firstIndex(matching: card) {
             return

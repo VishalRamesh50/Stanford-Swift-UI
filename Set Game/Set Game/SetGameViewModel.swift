@@ -27,7 +27,7 @@ class SetGameViewModel: ObservableObject {
     }
     
     func tap(card: Card) {
-        model.tap(card: card)
+        model.choose(card: card)
     }
     
     func deal3More() {
