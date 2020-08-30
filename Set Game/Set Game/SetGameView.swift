@@ -78,9 +78,13 @@ struct SetGameView: View {
 
 struct CardView: View {
     var card: Card
-    @State private var offsetX: CGFloat = CGFloat.random(in: -1000...1000)
-    @State private var offsetY: CGFloat = CGFloat.random(in: -1000...1000)
+    @State private var offsetX: CGFloat = CardView.randomNumber
+    @State private var offsetY: CGFloat = CardView.randomNumber
     @Environment(\.colorScheme) private var colorScheme
+    
+    static private var randomNumber: CGFloat {
+        Bool.random() ? CGFloat.random(in: -3000 ... -1500) : CGFloat.random(in: 1500 ... 3000)
+    }
     
     var body: some View {
         return ZStack {
@@ -103,7 +107,7 @@ struct CardView: View {
             .offset(x: offsetX, y: offsetY)
             .padding(3)
             .animation(.spring())
-            .transition(.offset(x: CGFloat.random(in: -5000...5000), y: CGFloat.random(in: -5000...5000)))
+            .transition(.offset(x: CardView.randomNumber, y: CardView.randomNumber))
             .onAppear() {
                 self.offsetX = 0
                 self.offsetY = 0
