@@ -35,11 +35,6 @@ struct SetGameModel {
     }
     
     mutating func tap(card: Card) {
-        // if the initial deal hasn't been completed don't let users select cards
-        if self.dealtCards.count < 12 && !self.deck.isEmpty {
-            return
-        }
-        
         // if 3 cards have already been selected, don't allow deselection
         if selectedCards.count == 3, let _ = selectedCards.firstIndex(matching: card) {
             return

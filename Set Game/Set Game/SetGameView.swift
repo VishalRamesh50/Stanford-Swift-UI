@@ -10,12 +10,15 @@ import SwiftUI
 
 struct SetGameView: View {
     @ObservedObject var viewModel: SetGameViewModel
+    @State private var animationInProgress: Bool = false
 
     var body: some View {
         VStack {
             Grid(self.viewModel.dealtCards) { card in
                 CardView(card: card).onTapGesture {
-                    self.viewModel.tap(card: card)
+                    if !self.animationInProgress {
+                        self.viewModel.tap(card: card)
+                    }
                 }
             }.onAppear {
                 self.newGameDeal()
@@ -29,10 +32,12 @@ struct SetGameView: View {
     }
     
     private func newGameDeal() {
-        var count = 0
+        self.animationInProgress = true
+        var count = 1
         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true){ t in
-            if count == 11 {
+            if count == 12 {
                 t.invalidate()
+                self.animationInProgress = false
             }
             withAnimation(Animation.easeInOut) {
                 self.viewModel.deal()
@@ -42,31 +47,32 @@ struct SetGameView: View {
     }
     
     private var NewGame: some View {
-        return Button(action: {
-            self.viewModel.newGame()
-            self.newGameDeal()
-        }, label: {
-            Text("NEW GAME")
-                .padding(10)
-                .padding(.horizontal, 10)
-                .background(Color.green)
-                .foregroundColor(Color.white)
-                .cornerRadius(30)
-        })
+        makeButton(
+            disabledCondition: { self.animationInProgress },
+            action: { self.viewModel.resetGame(); self.newGameDeal() },
+            enabledColor: Color.green,
+            text: "NEW GAME"
+        )
     }
     
     private var Deal3MoreButton: some View {
-        let isDisabled: Bool  = self.viewModel.isDeckEmpty || self.viewModel.dealtCards.count < 12
-        return Button(action: {
-            self.viewModel.deal3More()
-        }, label: {
-            Text("Deal 3 More")
+        makeButton(
+            disabledCondition: { self.viewModel.isDeckEmpty || self.animationInProgress },
+            action: { self.viewModel.deal3More() },
+            enabledColor: Color.pink,
+            text: "Deal 3 More"
+        )
+    }
+    
+    private func makeButton(disabledCondition: () -> Bool, action: @escaping () -> Void, enabledColor: Color, text: String) -> some View {
+        Button(action: action, label: {
+            Text(text)
                 .padding(10)
                 .padding(.horizontal, 10)
-                .background(isDisabled ? Color.gray : Color.pink)
+                .background(disabledCondition() ? Color.gray : enabledColor)
                 .foregroundColor(Color.white)
                 .cornerRadius(30)
-        }).disabled(isDisabled)
+        }).disabled(disabledCondition())
     }
 }
 

@@ -34,7 +34,7 @@ class SetGameViewModel: ObservableObject {
         model.deal3More()
     }
     
-    func newGame() {
+    func resetGame() {
         self.model = SetGameModel()
     }
 }
