@@ -88,6 +88,19 @@ struct SetGameModel {
             }
         }
     }
+    
+    mutating func deal3More() {
+        let matchedAndSelected = selectedCards.filter { $0.isMatched ?? false }
+        if matchedAndSelected.count == 3 {
+            for card in matchedAndSelected {
+                self.dealtCards[self.dealtCards.firstIndex(matching: card)!] = self.deck.removeLast()
+            }
+        } else {
+            for _ in 1...3 {
+                self.deal()
+            }
+        }
+    }
 }
 
 struct Card: Identifiable {

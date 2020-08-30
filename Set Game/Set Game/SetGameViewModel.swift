@@ -17,6 +17,10 @@ class SetGameViewModel: ObservableObject {
         model.dealtCards
     }
     
+    var isDeckEmpty: Bool {
+        model.deck.isEmpty
+    }
+    
     // MARK: - Intents
     func deal() {
         model.deal()
@@ -24,5 +28,9 @@ class SetGameViewModel: ObservableObject {
     
     func tap(card: Card) {
         model.tap(card: card)
+    }
+    
+    func deal3More() {
+        model.deal3More()
     }
 }

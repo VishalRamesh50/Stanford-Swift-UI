@@ -12,22 +12,39 @@ struct SetGameView: View {
     @ObservedObject var viewModel: SetGameViewModel
 
     var body: some View {
-        Grid(self.viewModel.dealtCards) { card in
-            CardView(card: card).onTapGesture {
-                self.viewModel.tap(card: card)
-            }
-        }.onAppear {
-            var count = 0
-            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true){ t in
-                if count == 11 {
-                    t.invalidate()
+        VStack {
+            Grid(self.viewModel.dealtCards) { card in
+                CardView(card: card).onTapGesture {
+                    self.viewModel.tap(card: card)
                 }
-                withAnimation(Animation.easeInOut) {
-                    self.viewModel.deal()
+            }.onAppear {
+                var count = 0
+                Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true){ t in
+                    if count == 11 {
+                        t.invalidate()
+                    }
+                    withAnimation(Animation.easeInOut) {
+                        self.viewModel.deal()
+                    }
+                    count += 1
                 }
-                count += 1
             }
+            Deal3MoreButton
         }
+    }
+    
+    private var Deal3MoreButton: some View {
+        let isDisabled: Bool  = self.viewModel.isDeckEmpty
+        return Button(action: {
+            self.viewModel.deal3More()
+        }, label: {
+            Text("Deal 3 More")
+                .padding(10)
+                .padding(.horizontal, 10)
+                .background(isDisabled ? Color.gray : Color.pink)
+                .foregroundColor(Color.white)
+                .cornerRadius(30)
+        }).disabled(isDisabled)
     }
 }
 
