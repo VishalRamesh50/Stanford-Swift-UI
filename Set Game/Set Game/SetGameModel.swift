@@ -71,8 +71,9 @@ struct SetGameModel {
         }
         
         // If the card selected was the 4th one, unselect all the cards except the
-        // most recently selected card. Replace cards that were a match with cards
-        // from the deck if the deck isn't empty. Revert the matched state if they were not.
+        // most recently selected card if it was a different one. Replace cards that were
+        // a match with cards from the deck if the deck isn't empty.
+        // Revert the matched state if they were not.
         if selectedCards.count == 4 || fourthClick {
             for cardToUnselect in selectedCards {
                 if cardToUnselect.id == card.id && !fourthClick {
