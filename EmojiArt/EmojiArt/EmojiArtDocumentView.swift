@@ -22,7 +22,9 @@ struct EmojiArtDocumentView: View {
                 }
             }
             .padding(.horizontal)
-            Rectangle().foregroundColor(.yellow)
+            Rectangle()
+                .foregroundColor(.yellow)
+                .edgesIgnoringSafeArea([.horizontal, .bottom])
         }
     }
     
