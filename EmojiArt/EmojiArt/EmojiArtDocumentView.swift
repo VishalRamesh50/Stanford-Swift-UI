@@ -12,6 +12,14 @@ struct EmojiArtDocumentView: View {
     @ObservedObject var document: EmojiArtDocument
 
     var body: some View {
-        Text("Hello, World!")
+        HStack {
+            ForEach(EmojiArtDocument.palette.map { String($0) }) { emoji in
+                Text(emoji)
+            }
+        }
     }
+}
+
+extension String: Identifiable {
+    public var id: String { return self }
 }
