@@ -13,6 +13,8 @@ class EmojiArtDocument: ObservableObject {
     
     @Published private var emojiArt: EmojiArt = EmojiArt()
     
+    @Published private(set) var backgroundImage: UIImage?
+    
     // MARK: - Intent(s)
     func addEmoji(_ emoji: String, at location: CGPoint, size: CGFloat) {
         emojiArt.addEmoji(emoji, x: Int(location.x), y: Int(location.y), size: Int(size))
@@ -33,5 +35,6 @@ class EmojiArtDocument: ObservableObject {
     
     func setBackgroundURL(_ url: URL?) {
         emojiArt.backgroundURL = url?.imageURL
+        fetchBackgroundImageData()
     }
 }
