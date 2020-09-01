@@ -14,6 +14,7 @@
 		CA232F5924FDB91700F88644 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA232F5824FDB91700F88644 /* Preview Assets.xcassets */; };
 		CA232F5C24FDB91700F88644 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA232F5A24FDB91700F88644 /* LaunchScreen.storyboard */; };
 		CAD356DF24FEC5FE001B5204 /* EmojiArtDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD356DE24FEC5FE001B5204 /* EmojiArtDocument.swift */; };
+		CAD356E124FED87C001B5204 /* EmojiArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD356E024FED87C001B5204 /* EmojiArt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		CA232F5B24FDB91700F88644 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA232F5D24FDB91700F88644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CAD356DE24FEC5FE001B5204 /* EmojiArtDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtDocument.swift; sourceTree = "<group>"; };
+		CAD356E024FED87C001B5204 /* EmojiArt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				CAD356DE24FEC5FE001B5204 /* EmojiArtDocument.swift */,
 				CA232F5324FDB91100F88644 /* EmojiArtDocumentView.swift */,
+				CAD356E024FED87C001B5204 /* EmojiArt.swift */,
 				CA232F4F24FDB91100F88644 /* AppDelegate.swift */,
 				CA232F5124FDB91100F88644 /* SceneDelegate.swift */,
 				CA232F5524FDB91700F88644 /* Assets.xcassets */,
@@ -151,6 +154,7 @@
 			files = (
 				CA232F5024FDB91100F88644 /* AppDelegate.swift in Sources */,
 				CA232F5224FDB91100F88644 /* SceneDelegate.swift in Sources */,
+				CAD356E124FED87C001B5204 /* EmojiArt.swift in Sources */,
 				CA232F5424FDB91100F88644 /* EmojiArtDocumentView.swift in Sources */,
 				CAD356DF24FEC5FE001B5204 /* EmojiArtDocument.swift in Sources */,
 			);
