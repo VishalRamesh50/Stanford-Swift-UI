@@ -13,13 +13,9 @@ struct EmojiArtDocumentView: View {
 
     var body: some View {
         HStack {
-            ForEach(EmojiArtDocument.palette.map { String($0) }) { emoji in
+            ForEach(EmojiArtDocument.palette.map { String($0) }, id: \.self) { emoji in
                 Text(emoji)
             }
         }
     }
-}
-
-extension String: Identifiable {
-    public var id: String { return self }
 }
