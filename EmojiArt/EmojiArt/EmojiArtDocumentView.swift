@@ -21,8 +21,7 @@ struct EmojiArtDocumentView: View {
                             .onDrag { NSItemProvider(object: emoji as NSString) }
                     }
                 }
-            }
-            .padding(.horizontal)
+            }.padding(.horizontal)
             GeometryReader { geometry in
                 ZStack {
                     Color.white.overlay(
