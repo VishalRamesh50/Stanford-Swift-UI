@@ -28,6 +28,7 @@ struct EmojiArtDocumentView: View {
                         OptionalImage(uiImage: self.document.backgroundImage)
                             .scaleEffect(self.zoomScale)
                     )
+                        .gesture(self.doubleTapToZoom(in: geometry.size))
                     ForEach(self.document.emojis) { emoji in
                         Text(emoji.text)
                             .font(self.font(for: emoji))
@@ -49,6 +50,23 @@ struct EmojiArtDocumentView: View {
     }
     
     @State private var zoomScale: CGFloat = 1.0
+    
+    private func doubleTapToZoom(in size: CGSize) -> some Gesture {
+        TapGesture(count: 2)
+            .onEnded {
+                withAnimation {
+                    self.zoomToFit(self.document.backgroundImage, in: size)
+                }
+            }
+    }
+    
+    private func zoomToFit(_ image: UIImage?, in size: CGSize) {
+        if let image = image, image.size.width > 0, image.size.height > 0 {
+            let hZoom = size.width / image.size.width
+            let vZoom = size.height / image.size.height
+            self.zoomScale = min(hZoom, vZoom)
+        }
+    }
     
     private func font(for emoji: EmojiArt.Emoji) -> Font {
         Font.system(size: emoji.fontSize * self.zoomScale)
