@@ -17,6 +17,7 @@
 		CAD356DF24FEC5FE001B5204 /* EmojiArtDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD356DE24FEC5FE001B5204 /* EmojiArtDocument.swift */; };
 		CAD356E124FED87C001B5204 /* EmojiArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD356E024FED87C001B5204 /* EmojiArt.swift */; };
 		CAF1158725005E05002963E2 /* OptionalImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF1158625005E05002963E2 /* OptionalImage.swift */; };
+		CAF11589250065BF002963E2 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF11588250065BF002963E2 /* AnimatableSystemFontModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		CAD356DE24FEC5FE001B5204 /* EmojiArtDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtDocument.swift; sourceTree = "<group>"; };
 		CAD356E024FED87C001B5204 /* EmojiArt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArt.swift; sourceTree = "<group>"; };
 		CAF1158625005E05002963E2 /* OptionalImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalImage.swift; sourceTree = "<group>"; };
+		CAF11588250065BF002963E2 /* AnimatableSystemFontModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableSystemFontModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				CAD356DE24FEC5FE001B5204 /* EmojiArtDocument.swift */,
 				CA232F5324FDB91100F88644 /* EmojiArtDocumentView.swift */,
 				CAF1158625005E05002963E2 /* OptionalImage.swift */,
+				CAF11588250065BF002963E2 /* AnimatableSystemFontModifier.swift */,
 				CAD356E024FED87C001B5204 /* EmojiArt.swift */,
 				CA907B0124FF022100365C1F /* EmojiArtExtensions.swift */,
 				CA232F4F24FDB91100F88644 /* AppDelegate.swift */,
@@ -164,6 +167,7 @@
 				CAD356E124FED87C001B5204 /* EmojiArt.swift in Sources */,
 				CA232F5424FDB91100F88644 /* EmojiArtDocumentView.swift in Sources */,
 				CAF1158725005E05002963E2 /* OptionalImage.swift in Sources */,
+				CAF11589250065BF002963E2 /* AnimatableSystemFontModifier.swift in Sources */,
 				CAD356DF24FEC5FE001B5204 /* EmojiArtDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
