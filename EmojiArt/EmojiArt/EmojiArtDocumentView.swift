@@ -44,7 +44,7 @@ struct EmojiArtDocumentView: View {
                             .font(self.font(for: emoji))
                             .position(self.position(for: emoji, in: geometry.size))
                     }
-                }
+                }.clipped()
             }
         }
     }
