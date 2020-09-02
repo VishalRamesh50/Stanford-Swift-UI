@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct EmojiArt: Encodable, Decodable {
+struct EmojiArt: Codable {
     var backgroundURL: URL?
     var emojis = [Emoji]()
     
-    struct Emoji: Identifiable, Encodable, Decodable {
+    struct Emoji: Identifiable, Codable {
         let text: String
         var x: Int // offset from the center
         var y: Int // offset from the center
