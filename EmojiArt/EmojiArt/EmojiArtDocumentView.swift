@@ -59,7 +59,6 @@ struct EmojiArtDocumentView: View {
     
     private func drop(providers: [NSItemProvider], at location: CGPoint) -> Bool {
         var found = providers.loadFirstObject(ofType: URL.self) { url in
-            print("dropped \(url)")
             self.document.setBackgroundURL(url)
         }
         if !found {
